@@ -16,6 +16,29 @@ library(ggplot2)
 library(ggthemes)
 library(broom)
 library(kableExtra)
+library(tibble)
+library(dplyr)
+library(tidyr)
+```
+
+## Mtcars
+
+```{r plot-mtcars, echo=F}
+library(dplyr)
+mtcars |> 
+    as_tibble() |> 
+    mutate(models = row.names(mtcars),
+           .before = mpg) |> 
+    select(models, mpg, hp, wt) |> 
+    pivot_longer(
+        hp:wt
+    ) |> 
+    ggplot() +
+    aes(value, mpg) +
+    geom_point() +
+    facet_wrap(vars(name),
+               scales = "free") +
+    theme_minimal()
 ```
 
 ## Regression Model
