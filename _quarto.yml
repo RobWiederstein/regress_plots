@@ -1,2 +1,5 @@
 project:
   output-dir: docs
+toc: true
+number-depth: 3
+number-sections: true

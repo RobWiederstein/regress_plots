@@ -100,10 +100,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#regression-plots" id="toc-regression-plots" class="nav-link active" data-scroll-target="#regression-plots"><span class="toc-section-number">1</span>  Regression Plots</a></li>
+  <li><a href="#default-plots" id="toc-default-plots" class="nav-link" data-scroll-target="#default-plots"><span class="toc-section-number">2</span>  Default Plots</a></li>
+  <li><a href="#performance-plots" id="toc-performance-plots" class="nav-link" data-scroll-target="#performance-plots"><span class="toc-section-number">3</span>  Performance Plots</a>
+  <ul class="collapse">
+  <li><a href="#default-performance-plot" id="toc-default-performance-plot" class="nav-link" data-scroll-target="#default-performance-plot"><span class="toc-section-number">3.1</span>  Default Performance Plot</a></li>
+  <li><a href="#theme-minimal" id="toc-theme-minimal" class="nav-link" data-scroll-target="#theme-minimal"><span class="toc-section-number">3.2</span>  Theme Minimal</a></li>
+  <li><a href="#theme-tufte" id="toc-theme-tufte" class="nav-link" data-scroll-target="#theme-tufte"><span class="toc-section-number">3.3</span>  Theme Tufte</a></li>
+  </ul></li>
+  <li><a href="#check-normality" id="toc-check-normality" class="nav-link" data-scroll-target="#check-normality"><span class="toc-section-number">4</span>  Check Normality</a></li>
+  <li><a href="#check-heteroskedacity" id="toc-check-heteroskedacity" class="nav-link" data-scroll-target="#check-heteroskedacity"><span class="toc-section-number">5</span>  Check Heteroskedacity</a></li>
+  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges"><span class="toc-section-number">6</span>  Challenges</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><span class="toc-section-number">7</span>  Acknowledgements</a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -123,14 +142,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="regression-plots" class="level2">
-<h2 class="anchored" data-anchor-id="regression-plots">Regression Plots</h2>
+<section id="regression-plots" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="regression-plots"><span class="header-section-number">1</span> Regression Plots</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> hp <span class="sc">*</span> wt, <span class="at">data =</span> mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="default-plots" class="level2">
-<h2 class="anchored" data-anchor-id="default-plots">Default Plots</h2>
+<section id="default-plots" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="default-plots"><span class="header-section-number">2</span> Default Plots</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -139,10 +158,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="performance-plots" class="level2">
-<h2 class="anchored" data-anchor-id="performance-plots">Performance Plots</h2>
-<section id="default-performance-plot" class="level3">
-<h3 class="anchored" data-anchor-id="default-performance-plot">Default Performance Plot</h3>
+<section id="performance-plots" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="performance-plots"><span class="header-section-number">3</span> Performance Plots</h2>
+<section id="default-performance-plot" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="default-performance-plot"><span class="header-section-number">3.1</span> Default Performance Plot</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lm, <span class="at">theme =</span> <span class="st">"see::theme_lucid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -150,8 +169,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="theme-minimal" class="level3">
-<h3 class="anchored" data-anchor-id="theme-minimal">Theme Minimal</h3>
+<section id="theme-minimal" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="theme-minimal"><span class="header-section-number">3.2</span> Theme Minimal</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lm, <span class="at">theme =</span> <span class="st">"ggplot2::theme_minimal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -159,8 +178,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="theme-tufte" class="level3">
-<h3 class="anchored" data-anchor-id="theme-tufte">Theme Tufte</h3>
+<section id="theme-tufte" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="theme-tufte"><span class="header-section-number">3.3</span> Theme Tufte</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lm, <span class="at">theme =</span> <span class="st">"ggthemes::theme_tufte()"</span>,</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#C87A8A"</span>, <span class="st">"#6B9D59"</span>, <span class="st">"#5F96C2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -170,8 +189,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="check-normality" class="level2">
-<h2 class="anchored" data-anchor-id="check-normality">Check Normality</h2>
+<section id="check-normality" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="check-normality"><span class="header-section-number">4</span> Check Normality</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_normality</span>(lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -180,8 +199,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>To better understand the function, run <code>?performance::check_normality()</code>.</p>
 </section>
-<section id="check-heteroskedacity" class="level2">
-<h2 class="anchored" data-anchor-id="check-heteroskedacity">Check Heteroskedacity</h2>
+<section id="check-heteroskedacity" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="check-heteroskedacity"><span class="header-section-number">5</span> Check Heteroskedacity</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_heteroskedasticity</span>(lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -190,12 +209,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>To better understand the function, run <code>?performance::check_heteroskedasticity()</code>.</p>
 </section>
-<section id="challenges" class="level2">
-<h2 class="anchored" data-anchor-id="challenges">Challenges</h2>
+<section id="challenges" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="challenges"><span class="header-section-number">6</span> Challenges</h2>
 <p>The <code>themes</code> argument did not work, <code>colors</code> argument did.</p>
 </section>
-<section id="acknowledgements" class="level2">
-<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<section id="acknowledgements" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="acknowledgements"><span class="header-section-number">7</span> Acknowledgements</h2>
 <p>Many thanks to Dr.&nbsp;Lyndon Walker for his tutorial on youtube. His channel can be found <a href="https://www.youtube.com/@DrLyndonWalker">here</a>.</p>
 </section>
 
