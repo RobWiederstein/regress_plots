@@ -8,27 +8,39 @@ editor: visual
 knitr::opts_chunk$set(warning=F, error=F, message=F)
 ```
 
+
 ```{r load-libraries, include=F}
 library(performance)
 library(see)
 library(ggplot2)
 library(ggthemes)
+library(broom)
+library(kableExtra)
 ```
 
-## Regression Plots
+## Regression Model
 
 ```{r}
 lm <- lm(mpg ~ hp * wt, data = mtcars)
 ```
 
-## Default Plots
+## Regression Results
+
+```{r}
+tidy(lm) |>  #broom package
+    kbl() |> #kableExtra
+    kable_styling(bootstrap_options = c("condensed", "striped"))
+```
+
+
+## Diagnostic Plots
+
+### Default
 
 ```{r}
 par(mfrow = c(2, 2))
 plot(lm)
 ```
-
-## Performance Plots
 
 ### Default Performance Plot
 

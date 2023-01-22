@@ -97,6 +97,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+<script src="index_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="index_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 </head>
 
@@ -108,13 +111,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#regression-plots" id="toc-regression-plots" class="nav-link active" data-scroll-target="#regression-plots"><span class="toc-section-number">1</span>  Regression Plots</a></li>
-  <li><a href="#default-plots" id="toc-default-plots" class="nav-link" data-scroll-target="#default-plots"><span class="toc-section-number">2</span>  Default Plots</a></li>
-  <li><a href="#performance-plots" id="toc-performance-plots" class="nav-link" data-scroll-target="#performance-plots"><span class="toc-section-number">3</span>  Performance Plots</a>
+  <li><a href="#regression-model" id="toc-regression-model" class="nav-link active" data-scroll-target="#regression-model"><span class="toc-section-number">1</span>  Regression Model</a></li>
+  <li><a href="#regression-results" id="toc-regression-results" class="nav-link" data-scroll-target="#regression-results"><span class="toc-section-number">2</span>  Regression Results</a></li>
+  <li><a href="#diagnostic-plots" id="toc-diagnostic-plots" class="nav-link" data-scroll-target="#diagnostic-plots"><span class="toc-section-number">3</span>  Diagnostic Plots</a>
   <ul class="collapse">
-  <li><a href="#default-performance-plot" id="toc-default-performance-plot" class="nav-link" data-scroll-target="#default-performance-plot"><span class="toc-section-number">3.1</span>  Default Performance Plot</a></li>
-  <li><a href="#theme-minimal" id="toc-theme-minimal" class="nav-link" data-scroll-target="#theme-minimal"><span class="toc-section-number">3.2</span>  Theme Minimal</a></li>
-  <li><a href="#theme-tufte" id="toc-theme-tufte" class="nav-link" data-scroll-target="#theme-tufte"><span class="toc-section-number">3.3</span>  Theme Tufte</a></li>
+  <li><a href="#default" id="toc-default" class="nav-link" data-scroll-target="#default"><span class="toc-section-number">3.1</span>  Default</a></li>
+  <li><a href="#default-performance-plot" id="toc-default-performance-plot" class="nav-link" data-scroll-target="#default-performance-plot"><span class="toc-section-number">3.2</span>  Default Performance Plot</a></li>
+  <li><a href="#theme-minimal" id="toc-theme-minimal" class="nav-link" data-scroll-target="#theme-minimal"><span class="toc-section-number">3.3</span>  Theme Minimal</a></li>
+  <li><a href="#theme-tufte" id="toc-theme-tufte" class="nav-link" data-scroll-target="#theme-tufte"><span class="toc-section-number">3.4</span>  Theme Tufte</a></li>
   </ul></li>
   <li><a href="#check-normality" id="toc-check-normality" class="nav-link" data-scroll-target="#check-normality"><span class="toc-section-number">4</span>  Check Normality</a></li>
   <li><a href="#check-heteroskedacity" id="toc-check-heteroskedacity" class="nav-link" data-scroll-target="#check-heteroskedacity"><span class="toc-section-number">5</span>  Check Heteroskedacity</a></li>
@@ -142,47 +146,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="regression-plots" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="regression-plots"><span class="header-section-number">1</span> Regression Plots</h2>
+<section id="regression-model" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="regression-model"><span class="header-section-number">1</span> Regression Model</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> hp <span class="sc">*</span> wt, <span class="at">data =</span> mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="default-plots" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="default-plots"><span class="header-section-number">2</span> Default Plots</h2>
+<section id="regression-results" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="regression-results"><span class="header-section-number">2</span> Regression Results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(lm) <span class="sc">|&gt;</span>  <span class="co">#broom package</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kbl</span>() <span class="sc">|&gt;</span> <span class="co">#kableExtra</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"condensed"</span>, <span class="st">"striped"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+
+<table class="table table-condensed table-striped" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> 49.8084234 </td>
+   <td style="text-align:right;"> 3.6051558 </td>
+   <td style="text-align:right;"> 13.815886 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hp </td>
+   <td style="text-align:right;"> -0.1201021 </td>
+   <td style="text-align:right;"> 0.0246983 </td>
+   <td style="text-align:right;"> -4.862758 </td>
+   <td style="text-align:right;"> 0.0000404 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wt </td>
+   <td style="text-align:right;"> -8.2166243 </td>
+   <td style="text-align:right;"> 1.2697081 </td>
+   <td style="text-align:right;"> -6.471270 </td>
+   <td style="text-align:right;"> 0.0000005 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hp:wt </td>
+   <td style="text-align:right;"> 0.0278481 </td>
+   <td style="text-align:right;"> 0.0074196 </td>
+   <td style="text-align:right;"> 3.753332 </td>
+   <td style="text-align:right;"> 0.0008108 </td>
+  </tr>
+</tbody>
+</table>
+
 </div>
 </div>
 </section>
-<section id="performance-plots" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="performance-plots"><span class="header-section-number">3</span> Performance Plots</h2>
-<section id="default-performance-plot" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="default-performance-plot"><span class="header-section-number">3.1</span> Default Performance Plot</h3>
+<section id="diagnostic-plots" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="diagnostic-plots"><span class="header-section-number">3</span> Diagnostic Plots</h2>
+<section id="default" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="default"><span class="header-section-number">3.1</span> Default</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lm, <span class="at">theme =</span> <span class="st">"see::theme_lucid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="default-performance-plot" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="default-performance-plot"><span class="header-section-number">3.2</span> Default Performance Plot</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lm, <span class="at">theme =</span> <span class="st">"see::theme_lucid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/new-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
-<section id="theme-minimal" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="theme-minimal"><span class="header-section-number">3.2</span> Theme Minimal</h3>
+<section id="theme-minimal" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="theme-minimal"><span class="header-section-number">3.3</span> Theme Minimal</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lm, <span class="at">theme =</span> <span class="st">"ggplot2::theme_minimal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lm, <span class="at">theme =</span> <span class="st">"ggplot2::theme_minimal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/theme-minimal-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
-<section id="theme-tufte" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="theme-tufte"><span class="header-section-number">3.3</span> Theme Tufte</h3>
+<section id="theme-tufte" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="theme-tufte"><span class="header-section-number">3.4</span> Theme Tufte</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lm, <span class="at">theme =</span> <span class="st">"ggthemes::theme_tufte()"</span>,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#C87A8A"</span>, <span class="st">"#6B9D59"</span>, <span class="st">"#5F96C2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lm, <span class="at">theme =</span> <span class="st">"ggthemes::theme_tufte()"</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#C87A8A"</span>, <span class="st">"#6B9D59"</span>, <span class="st">"#5F96C2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/theme-tufte-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
@@ -192,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="check-normality" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="check-normality"><span class="header-section-number">4</span> Check Normality</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_normality</span>(lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_normality</span>(lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OK: residuals appear as normally distributed (p = 0.138).</code></pre>
 </div>
@@ -202,7 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="check-heteroskedacity" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="check-heteroskedacity"><span class="header-section-number">5</span> Check Heteroskedacity</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_heteroskedasticity</span>(lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_heteroskedasticity</span>(lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OK: Error variance appears to be homoscedastic (p = 0.055).</code></pre>
 </div>
