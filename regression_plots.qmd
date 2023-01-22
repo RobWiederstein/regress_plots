@@ -1,0 +1,74 @@
+---
+title: "Regression Plots"
+format: html
+editor: visual
+---
+
+```{r setup}
+knitr::opts_chunk$set(warning=F, error=F, message=F)
+```
+
+```{r load-libraries, include=F}
+library(performance)
+library(see)
+library(ggplot2)
+library(ggthemes)
+```
+
+## Regression Plots
+
+```{r}
+lm <- lm(mpg ~ hp * wt, data = mtcars)
+```
+
+## Default Plots
+
+```{r}
+par(mfrow = c(2, 2))
+plot(lm)
+```
+
+
+## Performance Plots
+
+### Default Performance Plot
+
+```{r new, out.width="100%", fig.height=8}
+performance::check_model(lm, theme = "see::theme_lucid")
+```
+### Theme Minimal
+
+```{r theme-minimal, out.width="100%", fig.height=8}
+performance::check_model(lm, theme = "ggplot2::theme_minimal")
+```
+
+### Theme Tufte
+
+```{r theme-tufte, out.width="100%", fig.height=8}
+performance::check_model(lm, theme = "ggthemes::theme_tufte()",
+                         colors = c("#C87A8A", "#6B9D59", "#5F96C2"))
+```
+
+## Check Normality
+
+```{r}
+check_normality(lm)
+```
+
+To better understand the function, run `?performance::check_normality()`.
+
+## Check Heteroskedacity
+
+```{r}
+check_heteroskedasticity(lm)
+```
+
+To better understand the function, run `?performance::check_heteroskedasticity()`.
+
+## Challenges
+
+The `themes` argument did not work, `colors` argument did.  
+
+## Acknowledgements
+
+Many thanks to Dr. Lyndon Walker for his tutorial on youtube.  His channel can be found [here](https://www.youtube.com/@DrLyndonWalker).
